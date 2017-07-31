@@ -1,0 +1,14 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "only-arrow-functions": true,
+    "quotemark": [true, "single", "avoid-escape", "avoid-template"],
+    "semicolon": [true, "always"],
+    "typedef": [true, "call-signature", "parameter", "member-variable-declaration"],
+    "prefer-const": true,
+    "prefer-template": true,
+    "prefer-switch": true,
+    "trailing-comma": false,
+    "no-console": false
+  }
+}

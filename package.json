@@ -1,0 +1,22 @@
+{
+  "name": "cloudwatch2slack",
+  "version": "0.1.0",
+  "description": "AWS Lambda function to send Cloudwatch alarms to Slack",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "@types/lodash": "^4.14.70",
+    "@types/node-slack": "0.0.29",
+    "aws-lambda-typescript": "0.0.15",
+    "gulp": "^3.9.1",
+    "mocha": "^3.4.2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.92.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.0.0",
+    "node-slack": "0.0.7"
+  }
+}
