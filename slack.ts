@@ -3,16 +3,14 @@ import * as Slack from 'node-slack';
 import { AlarmDetails, AlarmTrigger, Dimension } from './alarm_details';
 import * as mappings from './mappings';
 
-const markdownFormattedFields = [ 'text', 'pretext', 'fallback', 'fields'];
+const markdownFormattedFields = [ 'text', 'pretext', 'fallback', 'fields', 'title_link'];
 
-export const sendNotification = (webhookUrl: string, region: string, channel: string, alarmDetails: AlarmDetails) => {
-    const slack = new Slack(webhookUrl);
-
+export const sendNotification = (client: Slack, region: string, channel: string, alarmDetails: AlarmDetails) => {
     const alarmState = mappings.mapAlarmState(alarmDetails.NewStateValue);
     const msgTitle = title(region, alarmDetails.AlarmName);
 
     const callback = (err: any, body: any) => console.log(err);
-    slack.send({
+    client.send({
         attachments: [
             {
                 color: alarmState.color,
@@ -35,7 +33,8 @@ export const sendNotification = (webhookUrl: string, region: string, channel: st
 };
 
 const detailsTitle = (transition: string, description: string): string => {
-    return `${transition}: ${description}`;
+    const desc = description || '_No alarm description available_'
+    return `${transition}: ${desc}`;
 };
 
 const title = (region: string, alarmName: string): string => {
