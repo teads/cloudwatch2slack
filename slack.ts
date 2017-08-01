@@ -3,7 +3,7 @@ import * as Slack from 'node-slack';
 import { AlarmDetails, AlarmTrigger, Dimension } from './alarm_details';
 import * as mappings from './mappings';
 
-const markdownFormattedFields = [ 'text', 'pretext', 'fallback', 'fields', 'title_link'];
+const markdownFormattedFields = [ 'text', 'pretext', 'fallback', 'fields'];
 
 export const sendNotification = (client: Slack, region: string, channel: string, alarmDetails: AlarmDetails) => {
     const alarmState = mappings.mapAlarmState(alarmDetails.NewStateValue);
@@ -33,7 +33,7 @@ export const sendNotification = (client: Slack, region: string, channel: string,
 };
 
 const detailsTitle = (transition: string, description: string): string => {
-    const desc = description || '_No alarm description available_'
+    const desc = description || 'No alarm description available';
     return `${transition}: ${desc}`;
 };
 
