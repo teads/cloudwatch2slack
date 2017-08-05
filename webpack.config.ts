@@ -3,7 +3,7 @@ import * as path from 'path';
 
 declare var __dirname: string;
 
-const srcDir = path.resolve(__dirname, 'src', 'main');
+const srcDir = path.resolve(__dirname, 'src');
 const distDir = path.resolve(__dirname, 'dist', 'files');
 
 const config: webpack.Configuration = {
