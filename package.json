@@ -9,11 +9,35 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "webpack --progress --config webpack.config.ts",
+    "test": "nyc mocha -r ts-node/register --ui mocha-typescript test/*.ts",
     "zip": "bestzip dist/archive.zip dist/files/*",
     "package": "npm run build && npm run zip"
   },
+  "nyc": {
+    "all" : true,
+    "include":[
+      "src/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "cobertura",
+      "text-summary",
+      "html"
+    ],
+    "sourceMap": true,
+    "instrument": true
+  },
   "devDependencies": {
     "@types/aws-lambda": "0.0.16",
+    "@types/chai": "^4.0.2",
     "@types/lodash": "^4.14.70",
     "@types/node": "^8.0.19",
     "@types/node-slack": "0.0.29",
@@ -22,7 +46,10 @@
     "bestzip": "^1.1.4",
     "chai": "^4.1.0",
     "mocha": "^3.4.2",
+    "mocha-typescript": "^1.1.7",
+    "nyc": "^11.1.0",
     "rimraf": "^2.6.1",
+    "source-map-support": "^0.4.15",
     "ts-loader": "^2.3.2",
     "ts-node": "^3.3.0",
     "tsfmt-loader": "0.0.1",
