@@ -46,18 +46,18 @@ const alarmStateMappings = new Mappings(
 const comparisonOperatorMappings = new Mappings(
     'comparison operator',
     new Mapping('GreaterThanOrEqualToThreshold', '>='),
-    new Mapping('GreaterThanThreshold',          '>'),
-    new Mapping('LessThanOrEqualToThreshold',    '<='),
-    new Mapping('LessThanThreshold',             '<')
+    new Mapping('GreaterThanThreshold', '>'),
+    new Mapping('LessThanOrEqualToThreshold', '<='),
+    new Mapping('LessThanThreshold', '<')
 );
 
 const statisticMappings = new Mappings(
     'statistic',
     new Mapping('SampleCount', 'samplesCount'),
-    new Mapping('Average',     'avg'),
-    new Mapping('Sum',         'sum'),
-    new Mapping('Minimum',     'min'),
-    new Mapping('Maximum',     'max')
+    new Mapping('Average', 'avg'),
+    new Mapping('Sum', 'sum'),
+    new Mapping('Minimum', 'min'),
+    new Mapping('Maximum', 'max')
 );
 
 export const mapAlarmState = (alarmState: string): AlarmStateMapping => {
