@@ -3,7 +3,7 @@ import * as Slack from 'node-slack';
 import { AlarmDetails, AlarmTrigger, Dimension } from './alarm_details';
 import * as mappings from './mappings';
 
-const markdownFormattedFields = [ 'text', 'pretext', 'fallback', 'fields'];
+const markdownFormattedFields = ['text', 'pretext', 'fallback', 'fields'];
 
 export const sendNotification = (client: Slack, region: string, channel: string, alarmDetails: AlarmDetails) => {
     const alarmState = mappings.mapAlarmState(alarmDetails.NewStateValue);

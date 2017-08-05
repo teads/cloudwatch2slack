@@ -1,4 +1,4 @@
-import {KMS} from 'aws-sdk';
+import { KMS } from 'aws-sdk';
 
 export class Config {
     public static load(): Promise<Config> {
@@ -6,10 +6,10 @@ export class Config {
             Config.requiredEnv('SLACK_WEBHOOK_URL')
         ].map((encrypted) => Config.decrypt(encrypted));
         return Promise.all(encryptedVars)
-                      .then((decrypted) => {
-                          const channel = process.env.CHANNEL || '';
-                          return new Config(decrypted[0], channel);
-                      });
+            .then((decrypted) => {
+                const channel = process.env.CHANNEL || '';
+                return new Config(decrypted[0], channel);
+            });
     }
 
     private static kms: KMS = new KMS();
@@ -17,7 +17,7 @@ export class Config {
     private static decrypt(value: string): Promise<string> {
         const encrypted = new Buffer(value, 'base64');
         return Config.kms
-            .decrypt({CiphertextBlob: encrypted})
+            .decrypt({ CiphertextBlob: encrypted })
             .promise()
             .then((resp) => {
                 const plaintext = resp.Plaintext;
