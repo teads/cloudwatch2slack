@@ -14,8 +14,8 @@
     "package": "npm run build && npm run zip"
   },
   "nyc": {
-    "all" : true,
-    "include":[
+    "all": true,
+    "include": [
       "src/*.ts"
     ],
     "extension": [
@@ -42,7 +42,6 @@
     "@types/node": "^8.0.19",
     "@types/node-slack": "0.0.29",
     "@types/webpack": "^3.0.5",
-    "aws-lambda": "^0.1.2",
     "bestzip": "^1.1.4",
     "chai": "^4.1.0",
     "mocha": "^3.4.2",
