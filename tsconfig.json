@@ -4,6 +4,7 @@
     "target": "es2015",
     "module": "commonjs",
     "strict": true,
+    "experimentalDecorators": true,
     "sourceMap": true,
     "skipLibCheck": true,
     "noImplicitReturns": true,
