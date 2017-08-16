@@ -1,5 +1,6 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
+import {CheckerPlugin} from 'awesome-typescript-loader';
 
 declare var __dirname: string;
 
@@ -24,7 +25,9 @@ const config: webpack.Configuration = {
                 enforce: 'pre',
                 loader: 'tslint-loader',
                 options: {
-                    formatter: 'codeFrame'
+                    fix: true,
+                    formatter: 'codeFrame',
+                    typeCheck: true,
                 }
             },
             {
@@ -37,11 +40,19 @@ const config: webpack.Configuration = {
             },
             {
                 test: /\.ts$/,
-                use: 'ts-loader',
-                exclude: /node_modules/
+                loader: 'awesome-typescript-loader',
+                exclude: /node_modules/,
+                options: {
+                    useBabel: true,
+                    useCache: true,
+                    useTranspileModule: true
+                }
             }
         ]
-    }
+    },
+    plugins: [
+        new CheckerPlugin()
+    ]
 }
 
 export default config;
