@@ -1,13 +1,13 @@
+import { IncomingWebhook } from '@slack/client';
 import { Callback, Context, Handler, SNSEventRecord } from 'aws-lambda';
 import * as _ from 'lodash';
-import * as Slack from 'node-slack';
 import { AlarmDetails } from './alarm_details';
 import { Config } from './config';
 import * as helpers from './helpers';
 import { sendNotification } from './slack';
 
 let config: Config;
-let slackClient: Slack;
+let slackClient: IncomingWebhook;
 
 const fail = (msg: string, callback: Callback) => {
     console.log(msg);
@@ -21,7 +21,7 @@ const func: Handler = (event: any, context: Context, callback: Callback) => {
         Config.load()
             .then((loadedConfig) => {
                 config = loadedConfig;
-                slackClient = new Slack(config.webhookUrl);
+                slackClient = new IncomingWebhook(config.webhookUrl);
                 processEvent(event, context, callback);
             })
             .catch((err) => fail(`Could not load configuration: ${err}`, callback));

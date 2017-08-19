@@ -1,16 +1,16 @@
+import { ChatPostMessageResult, IncomingWebhook } from '@slack/client';
 import * as moment from 'moment';
-import * as Slack from 'node-slack';
 import { AlarmDetails, AlarmTrigger, Dimension } from './alarm_details';
 import * as mappings from './mappings';
 
 const markdownFormattedFields = ['text', 'pretext', 'fallback', 'fields'];
 
-export const sendNotification = (client: Slack, region: string, channel: string, alarmDetails: AlarmDetails) => {
+export const sendNotification = (incomingWebhook: IncomingWebhook, region: string, channel: string, alarmDetails: AlarmDetails) => {
     const alarmState = mappings.mapAlarmState(alarmDetails.NewStateValue);
     const msgTitle = title(region, alarmDetails.AlarmName);
 
-    const callback = (err: any, body: any) => console.log(err);
-    client.send({
+    const callback = (err: Error, body: ChatPostMessageResult) => console.log(err);
+    incomingWebhook.send({
         attachments: [
             {
                 color: alarmState.color,
@@ -21,7 +21,7 @@ export const sendNotification = (client: Slack, region: string, channel: string,
                     field('Namepace', alarmDetails.Trigger.Namespace),
                     field('Dimensions', formatDimensions(alarmDetails.Trigger.Dimensions)),
                 ],
-                markdown_in: markdownFormattedFields,
+                mrkdwn_in: markdownFormattedFields,
                 text: `${formatTrigger(alarmDetails.Trigger)}\n\n${alarmDetails.NewStateReason}`,
                 title: detailsTitle(alarmState.transition, alarmDetails.AlarmDescription),
                 title_link: alarmLink(alarmDetails.AlarmName, region)
