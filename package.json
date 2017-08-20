@@ -5,7 +5,10 @@
   "main": "index.js",
   "author": "Pierre Dal-Pra<pierre.dalpra@teads.tv>",
   "repository": "teads/cloudwatch2slack",
-  "license": "MIT",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/teads/cloudwatch2slack/issues"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "build": "webpack --progress --config webpack.config.ts",
