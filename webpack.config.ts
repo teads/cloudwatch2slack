@@ -1,6 +1,6 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
-import {CheckerPlugin} from 'awesome-typescript-loader';
+import { CheckerPlugin } from 'awesome-typescript-loader';
 
 declare var __dirname: string;
 
