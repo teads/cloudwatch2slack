@@ -1,5 +1,5 @@
-import { suite, test } from 'mocha-typescript';
 import { expect } from 'chai';
+import { suite, test } from 'mocha-typescript';
 
 import * as helpers from '../src/helpers';
 
