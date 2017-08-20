@@ -1,7 +1,7 @@
 import { ChatPostMessageResult, IncomingWebhook } from '@slack/client';
 import * as moment from 'moment';
 import { AlarmDetails, AlarmTrigger, Dimension } from './alarm_details';
-import * as mappings from './mappings';
+import * as mappings from './mappings/definitions';
 
 const markdownFormattedFields = ['text', 'pretext', 'fallback', 'fields'];
 

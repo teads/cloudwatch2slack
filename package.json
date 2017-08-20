@@ -9,14 +9,14 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "webpack --progress --config webpack.config.ts",
-    "test": "nyc mocha -r ts-node/register --ui mocha-typescript test/*.ts",
+    "test": "nyc mocha -r ts-node/register --ui mocha-typescript test/*.ts test/*/**.ts",
     "zip": "bestzip dist/archive.zip dist/files/*",
     "package": "npm run build && npm run zip"
   },
   "nyc": {
     "all": true,
     "include": [
-      "src/*.ts"
+      "src/**/*.ts"
     ],
     "extension": [
       ".ts"
