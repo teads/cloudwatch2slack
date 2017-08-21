@@ -1,35 +1,34 @@
-import { ChatPostMessageResult, IncomingWebhook } from '@slack/client';
+import { ChatPostMessageParams } from '@slack/client';
 import * as moment from 'moment';
-import { AlarmDetails, AlarmTrigger, Dimension } from './alarm_details';
-import * as mappings from './mappings/definitions';
+import { AlarmDetails, AlarmTrigger, Dimension } from '../alarm_details';
+import * as mappings from '../mappings/definitions';
 
 const markdownFormattedFields = ['text', 'pretext', 'fallback', 'fields'];
 
-export const sendNotification = (incomingWebhook: IncomingWebhook, region: string, channel: string, alarmDetails: AlarmDetails) => {
-    const alarmState = mappings.mapAlarmState(alarmDetails.NewStateValue);
-    const msgTitle = title(region, alarmDetails.AlarmName);
+export const buildSlackMessage = (channel: string, region: string, alarm: AlarmDetails): ChatPostMessageParams => {
+    const alarmState = mappings.mapAlarmState(alarm.NewStateValue);
+    const msgTitle = title(region, alarm.AlarmName);
 
-    const callback = (err: Error, body: ChatPostMessageResult) => console.log(err);
-    incomingWebhook.send({
+    return {
         attachments: [
             {
                 color: alarmState.color,
                 fallback: msgTitle,
                 fields: [
-                    field('State Changed', stateChangedDate(alarmDetails.StateChangeTime)),
-                    field('Previous state', alarmDetails.OldStateValue),
-                    field('Namepace', alarmDetails.Trigger.Namespace),
-                    field('Dimensions', formatDimensions(alarmDetails.Trigger.Dimensions)),
+                    field('State Changed', stateChangedDate(alarm.StateChangeTime)),
+                    field('Previous state', alarm.OldStateValue),
+                    field('Namepace', alarm.Trigger.Namespace),
+                    field('Dimensions', formatDimensions(alarm.Trigger.Dimensions)),
                 ],
                 mrkdwn_in: markdownFormattedFields,
-                text: `${formatTrigger(alarmDetails.Trigger)}\n\n${alarmDetails.NewStateReason}`,
-                title: detailsTitle(alarmState.transition, alarmDetails.AlarmDescription),
-                title_link: alarmLink(alarmDetails.AlarmName, region)
+                text: `${formatTrigger(alarm.Trigger)}\n\n${alarm.NewStateReason}`,
+                title: detailsTitle(alarmState.transition, alarm.AlarmDescription),
+                title_link: alarmLink(alarm.AlarmName, region)
             }
         ],
         channel,
         text: msgTitle,
-    }, callback);
+    };
 };
 
 const detailsTitle = (transition: string, description: string): string => {
@@ -46,8 +45,8 @@ const alarmLink = (alarmName: string, region: string): string => {
     return `https://${region}.console.aws.amazon.com/cloudwatch/home?region=${region}#alarm:alarmFilter=ANY;name=${encoded}`;
 };
 
-const field = (title: string, value: string, short: boolean = true) => {
-    return { title, value, short };
+const field = (fieldTitle: string, value: string, short: boolean = true) => {
+    return { fieldTitle: title, value, short };
 };
 
 const formatTrigger = (trigger: AlarmTrigger): string => {

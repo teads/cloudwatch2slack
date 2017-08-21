@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import { AlarmDetails } from './alarm_details';
 import { Config } from './config';
 import * as helpers from './helpers';
-import { sendNotification } from './slack';
+import { sendNotification } from './slack/sender';
 
 let config: Config;
 let slackClient: IncomingWebhook;
