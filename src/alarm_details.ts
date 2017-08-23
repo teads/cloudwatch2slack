@@ -13,6 +13,7 @@ export interface AlarmTrigger {
     MetricName: string;
     Namespace: string;
     Statistic: string;
+    ExtendedStatistic: string;
     Dimensions: Dimension[];
     ComparisonOperator: string;
     Period: number;

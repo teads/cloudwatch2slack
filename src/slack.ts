@@ -51,7 +51,7 @@ const field = (title: string, value: string, short: boolean = true) => {
 };
 
 const formatTrigger = (trigger: AlarmTrigger): string => {
-    const operator = mappings.mapOperator(trigger.ComparisonOperator);
+    const operator = trigger.ExtendedStatistic || mappings.mapOperator(trigger.ComparisonOperator);
     const stat = mappings.mapStatistic(trigger.Statistic);
     return `Trigger: ${stat}(${trigger.MetricName}) ${operator} ${trigger.Threshold} for ${trigger.EvaluationPeriods} periods of ${trigger.Period}s`;
 };
