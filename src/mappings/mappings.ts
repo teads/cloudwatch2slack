@@ -1,4 +1,4 @@
-import { find } from 'lodash';
+import * as _ from 'lodash';
 
 type Mapping<T> = [string, T];
 
@@ -12,7 +12,7 @@ export class Mappings<T> {
     }
 
     public lookup(key: string): T {
-        const mapping = find(this.mappings, (m) => key === m[0]);
+        const mapping = _.find(this.mappings, (m) => key === m[0]);
         if (mapping === undefined) {
             throw new Error(`Unexpected ${this.mappingType} type: ${key}`);
         }
