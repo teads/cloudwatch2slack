@@ -1,5 +1,6 @@
 import { IncomingWebhook } from '@slack/client';
 import { Callback, Context, Handler, SNSEventRecord } from 'aws-lambda';
+import 'es6-promise/auto'; // ES6 Promise polyfill, for side-effects only
 import * as _ from 'lodash';
 import { AlarmDetails } from './alarm_details';
 import { Config } from './config';

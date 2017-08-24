@@ -18,7 +18,15 @@ const config: webpack.Configuration = {
     resolve: {
         extensions: ['.js', '.ts']
     },
+    externals: [
+        'ws',
+        'vertx'
+    ],
     module: {
+        noParse: [
+            /ws/,
+            /vertx/
+        ],
         rules: [
             {
                 test: /\.ts$/,

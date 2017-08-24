@@ -1,14 +1,18 @@
 {
   "compilerOptions": {
     "moduleResolution": "node",
-    "target": "es2015",
+    "target": "es5",
     "module": "commonjs",
     "strict": true,
     "experimentalDecorators": true,
     "sourceMap": true,
     "skipLibCheck": true,
     "noImplicitReturns": true,
-    "noUnusedLocals": false
+    "noUnusedLocals": false,
+    "lib": [
+      "es5",
+      "es2015.promise"
+    ]
   },
   "exclude": [
     "dist",
