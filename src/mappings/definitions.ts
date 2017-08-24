@@ -18,7 +18,7 @@ const operatorMappings = new Mappings(
 
 const statisticMappings = new Mappings(
     'statistic',
-    ['SampleCount', 'sampleCount'], // TODO: check formatting of the statistic
+    ['SAMPLE_COUNT', 'sampleCount'],
     ['AVERAGE', 'avg'],
     ['SUM', 'sum'],
     ['MINIMUM', 'min'],
