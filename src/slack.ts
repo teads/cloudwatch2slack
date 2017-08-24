@@ -1,15 +1,15 @@
-import { ChatPostMessageResult, IncomingWebhook } from '@slack/client';
 import * as moment from 'moment';
+import * as Slack from 'node-slack';
 import { AlarmDetails, AlarmTrigger, Dimension } from './alarm_details';
 import * as mappings from './mappings/definitions';
 
 const markdownFormattedFields = ['text', 'pretext', 'fallback', 'fields'];
 
-export const sendNotification = (incomingWebhook: IncomingWebhook, region: string, channel: string, alarmDetails: AlarmDetails) => {
+export const sendNotification = (incomingWebhook: Slack, region: string, channel: string, alarmDetails: AlarmDetails) => {
     const alarmState = mappings.mapAlarmState(alarmDetails.NewStateValue);
     const msgTitle = title(region, alarmDetails.AlarmName);
 
-    const callback = (err: Error, body: ChatPostMessageResult) => console.log(err);
+    const callback = (err: any, body: any) => console.log(err);
     incomingWebhook.send({
         attachments: [
             {
