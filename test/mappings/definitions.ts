@@ -37,7 +37,7 @@ class MappingDefinitions {
     @test('statistic should map Cloudwatch statistics to their short name')
     public testStatistic() {
         expect(mappings.mapStatistic('AVERAGE')).to.equal('avg');
-        expect(mappings.mapStatistic('SampleCount')).to.equal('sampleCount');
+        expect(mappings.mapStatistic('SAMPLE_COUNT')).to.equal('sampleCount');
         expect(mappings.mapStatistic('SUM')).to.equal('sum');
         expect(mappings.mapStatistic('MINIMUM')).to.equal('min');
         expect(mappings.mapStatistic('MAXIMUM')).to.equal('max');
