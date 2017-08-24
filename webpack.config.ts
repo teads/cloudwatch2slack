@@ -7,11 +7,15 @@ declare var __dirname: string;
 const srcDir = path.resolve(__dirname, 'src');
 const distDir = path.resolve(__dirname, 'dist', 'files');
 
-const config: webpack.Configuration = {
+export const devConfig: webpack.Configuration = {
     devtool: 'cheap-source-map',
     entry: path.resolve(srcDir, 'index.ts'),
     target: 'node',
+    externals: [
+        /aws-sdk/
+    ],
     output: {
+        libraryTarget: 'commonjs2',
         path: distDir,
         filename: 'index.js'
     },
@@ -50,9 +54,16 @@ const config: webpack.Configuration = {
             }
         ]
     },
+    performance: {
+        maxAssetSize: 1500000,
+        maxEntrypointSize: 1500000
+    },
     plugins: [
-        new CheckerPlugin()
+        new CheckerPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': 'process.env'
+        })
     ]
 }
 
-export default config;
+export default devConfig;

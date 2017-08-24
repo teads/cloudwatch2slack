@@ -12,9 +12,10 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "webpack --progress --config webpack.config.ts",
+    "prod-build": "webpack --progress --config webpack-release.config.ts",
     "test": "nyc mocha -r ts-node/register --ui mocha-typescript test/*.ts test/*/**.ts",
     "zip": "bestzip dist/archive.zip dist/files/*",
-    "package": "npm run build && npm run zip"
+    "package": "npm run prod-build && npm run zip"
   },
   "nyc": {
     "all": true,
