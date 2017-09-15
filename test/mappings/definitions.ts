@@ -12,13 +12,13 @@ class MappingDefinitions {
         const alarm = mappings.mapAlarmState('ALARM');
         const insufficientData = mappings.mapAlarmState('INSUFFICIENT_DATA');
 
-        expect(ok.transition).to.equal('Recovered');
+        expect(ok.transition).to.equal('RECOVERED');
         expect(ok.color).to.equal('good');
 
-        expect(alarm.transition).to.equal('Triggered');
+        expect(alarm.transition).to.equal('TRIGGERED');
         expect(alarm.color).to.equal('danger');
 
-        expect(insufficientData.transition).to.equal('Warn');
+        expect(insufficientData.transition).to.equal('WARN');
         expect(insufficientData.color).to.equal('warn');
 
         expect(() => mappings.mapAlarmState('')).to.throw();

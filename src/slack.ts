@@ -7,7 +7,7 @@ const markdownFormattedFields = ['text', 'pretext', 'fallback', 'fields'];
 
 export const sendNotification = (incomingWebhook: Slack, region: string, channel: string, alarmDetails: AlarmDetails) => {
     const alarmState = mappings.mapAlarmState(alarmDetails.NewStateValue);
-    const msgTitle = title(region, alarmDetails.AlarmName);
+    const msgTitle = title(alarmState.transition, region, alarmDetails.AlarmName);
 
     const callback = (err: any, body: any) => console.log(err);
     incomingWebhook.send({
@@ -23,7 +23,7 @@ export const sendNotification = (incomingWebhook: Slack, region: string, channel
                 ],
                 mrkdwn_in: markdownFormattedFields,
                 text: `${formatTrigger(alarmDetails.Trigger)}\n\n${alarmDetails.NewStateReason}`,
-                title: detailsTitle(alarmState.transition, alarmDetails.AlarmDescription),
+                title: detailsTitle(alarmDetails.AlarmDescription),
                 title_link: alarmLink(alarmDetails.AlarmName, region)
             }
         ],
@@ -32,13 +32,13 @@ export const sendNotification = (incomingWebhook: Slack, region: string, channel
     }, callback);
 };
 
-const detailsTitle = (transition: string, description: string): string => {
+const detailsTitle = (description: string): string => {
     const desc = description || 'No alarm description available';
-    return `${transition}: ${desc}`;
+    return desc;
 };
 
-const title = (region: string, alarmName: string): string => {
-    return `\`${region.toUpperCase()}\` - *${alarmName}*`;
+const title = (transition: string, region: string, alarmName: string): string => {
+    return `*${transition}* - \`${region.toUpperCase()}\` - *${alarmName}*`;
 };
 
 const alarmLink = (alarmName: string, region: string): string => {
