@@ -3,9 +3,9 @@ import { AlarmStateMapping } from './types';
 
 const alarmStateMappings = new Mappings(
     'alarm state',
-    ['OK', new AlarmStateMapping('Recovered', 'good')],
-    ['ALARM', new AlarmStateMapping('Triggered', 'danger')],
-    ['INSUFFICIENT_DATA', new AlarmStateMapping('Warn', 'warn')],
+    ['OK', new AlarmStateMapping('RECOVERED', 'good')],
+    ['ALARM', new AlarmStateMapping('TRIGGERED', 'danger')],
+    ['INSUFFICIENT_DATA', new AlarmStateMapping('WARN', 'warn')],
 );
 
 const operatorMappings = new Mappings(
